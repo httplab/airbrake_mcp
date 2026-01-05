@@ -45,6 +45,16 @@ bundle install
 
 ## Claude Code Integration
 
+### Quick Setup
+
+```bash
+claude mcp add airbrake -- airbrake_mcp \
+  -e AIRBRAKE_USER_KEY=your_user_key \
+  -e AIRBRAKE_PROJECT_ID=123456
+```
+
+### Manual Configuration
+
 Add to `~/.claude/settings.json` or project's `.claude/settings.local.json`:
 
 ```json
@@ -67,7 +77,7 @@ Or if installed from source:
 {
   "mcpServers": {
     "airbrake": {
-      "command": "/path/to/airbrake_mcp/exe/airbrake_mcp",
+      "command": "/path/to/airbrake_mcp/bin/airbrake_mcp",
       "env": {
         "AIRBRAKE_USER_KEY": "your_user_key",
         "AIRBRAKE_PROJECT_ID": "123456"

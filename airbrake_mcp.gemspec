@@ -19,9 +19,9 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/httplab/airbrake_mcp/blob/master/CHANGELOG.md'
 
   spec.files = Dir.chdir(__dir__) do
-    Dir['{lib,exe}/**/*', 'README.md', 'LICENSE', 'CHANGELOG.md'].reject { |f| File.directory?(f) }
+    Dir['{lib,bin}/**/*', 'README.md', 'LICENSE', 'CHANGELOG.md'].reject { |f| File.directory?(f) }
   end
-  spec.bindir        = 'exe'
+  spec.bindir        = 'bin'
   spec.executables   = ['airbrake_mcp']
   spec.require_paths = ['lib']
 
