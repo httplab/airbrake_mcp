@@ -1,0 +1,32 @@
+{
+  "notices": [
+    {
+      "id": "abc123",
+      "createdAt": "2025-01-05T10:00:00Z",
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "message": "Something went wrong"
+        }
+      ],
+      "context": {
+        "url": "https://example.com/users/42",
+        "userAgent": "Mozilla/5.0 Chrome/120.0",
+        "userId": "user_123"
+      }
+    },
+    {
+      "id": "def456",
+      "createdAt": "2025-01-05T09:30:00Z",
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "message": "Something went wrong again"
+        }
+      ],
+      "context": {
+        "url": "https://example.com/orders/new"
+      }
+    }
+  ]
+}

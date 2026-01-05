@@ -1,0 +1,40 @@
+{
+  "groups": [
+    {
+      "id": 1001,
+      "resolved": false,
+      "muted": false,
+      "noticeCount": 42,
+      "lastNoticeAt": "2025-01-05T10:00:00Z",
+      "createdAt": "2025-01-01T00:00:00Z",
+      "context": { "environment": "production" },
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "message": "Something went wrong",
+          "backtrace": [
+            { "file": "app/models/user.rb", "line": 42, "function": "save!" },
+            { "file": "app/controllers/users_controller.rb", "line": 15, "function": "create" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1002,
+      "resolved": true,
+      "muted": true,
+      "noticeCount": 5,
+      "lastNoticeAt": "2025-01-04T08:00:00Z",
+      "createdAt": "2025-01-02T00:00:00Z",
+      "context": { "environment": "staging" },
+      "errors": [
+        {
+          "type": "NoMethodError",
+          "message": "undefined method `foo' for nil:NilClass",
+          "backtrace": []
+        }
+      ]
+    }
+  ],
+  "count": 2
+}

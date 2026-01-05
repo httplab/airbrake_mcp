@@ -1,0 +1,6 @@
+{
+  "projects": [
+    { "id": 123, "name": "Production App" },
+    { "id": 456, "name": "Staging App" }
+  ]
+}

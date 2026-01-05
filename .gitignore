@@ -1,0 +1,10 @@
+*.gem
+.env
+Gemfile.lock
+coverage/
+.bundle/
+pkg/
+doc/
+.yardoc/
+tmp/
+.rspec_status

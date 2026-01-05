@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'dotenv/load'
+
+require 'airbrake_mcp'
+
+# Initialize Airbrake client
+client = AirbrakeMcp::Client.new(
+  user_key: ENV.fetch('AIRBRAKE_USER_KEY') { raise 'AIRBRAKE_USER_KEY environment variable is required' },
+  project_id: ENV['AIRBRAKE_PROJECT_ID']&.to_i
+)
+
+# Create MCP server
+server = MCP::Server.new(
+  name: 'airbrake',
+  version: AirbrakeMcp::VERSION,
+  tools: [
+    AirbrakeMcp::Tools::ListProjects,
+    AirbrakeMcp::Tools::ListErrors,
+    AirbrakeMcp::Tools::GetError,
+    AirbrakeMcp::Tools::ListNotices,
+    AirbrakeMcp::Tools::ResolveError,
+    AirbrakeMcp::Tools::MuteError
+  ],
+  server_context: { client: client }
+)
+
+# Start STDIO transport
+transport = MCP::Server::Transports::StdioTransport.new(server)
+transport.open
