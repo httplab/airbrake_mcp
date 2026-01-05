@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2025-01-06
+
+### Changed
+- Renamed `exe` directory to `bin` (POSIX convention)
+- Added `claude mcp add` quick setup command to README
+
 ## [1.0.0] - 2025-01-05
 
 ### Added
