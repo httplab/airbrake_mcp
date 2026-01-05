@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.3] - 2026-01-06
+
+### Fixed
+- Removed `require 'bundler/setup'` from bin script to fix Bundler conflicts when running from project directories with their own Gemfile
+- Made dotenv loading optional (development dependency only)
+
+### Changed
+- Simplified README installation instructions
+
 ## [1.0.2] - 2025-01-06
 
 ### Added

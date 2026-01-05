@@ -1,8 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'bundler/setup'
-require 'dotenv/load'
+# Load dotenv for development (optional)
+begin
+  require 'dotenv/load'
+rescue LoadError
+  # dotenv is optional, used only for local development
+end
 
 require 'airbrake_mcp'
 
