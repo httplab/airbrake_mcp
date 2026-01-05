@@ -48,7 +48,28 @@ bundle install
 ### Quick Setup
 
 ```bash
-claude mcp add airbrake -- airbrake_mcp \
+claude mcp add airbrake $(which airbrake_mcp) \
+  -e AIRBRAKE_USER_KEY=your_user_key \
+  -e AIRBRAKE_PROJECT_ID=123456
+```
+
+### Using rbenv/asdf/chruby
+
+If you use a Ruby version manager, Claude Code runs in a non-interactive shell without access to your `.bashrc`/`.zshrc`. You need to provide the full path to the shim:
+
+```bash
+# For rbenv
+claude mcp add airbrake ~/.rbenv/shims/airbrake_mcp \
+  -e AIRBRAKE_USER_KEY=your_user_key \
+  -e AIRBRAKE_PROJECT_ID=123456
+
+# For asdf
+claude mcp add airbrake ~/.asdf/shims/airbrake_mcp \
+  -e AIRBRAKE_USER_KEY=your_user_key \
+  -e AIRBRAKE_PROJECT_ID=123456
+
+# For chruby (use full gem path)
+claude mcp add airbrake $(gem environment gemdir)/bin/airbrake_mcp \
   -e AIRBRAKE_USER_KEY=your_user_key \
   -e AIRBRAKE_PROJECT_ID=123456
 ```
@@ -61,23 +82,8 @@ Add to `~/.claude/settings.json` or project's `.claude/settings.local.json`:
 {
   "mcpServers": {
     "airbrake": {
-      "command": "airbrake_mcp",
-      "env": {
-        "AIRBRAKE_USER_KEY": "your_user_key",
-        "AIRBRAKE_PROJECT_ID": "123456"
-      }
-    }
-  }
-}
-```
-
-Or if installed from source:
-
-```json
-{
-  "mcpServers": {
-    "airbrake": {
-      "command": "/path/to/airbrake_mcp/bin/airbrake_mcp",
+      "command": "/full/path/to/airbrake_mcp",
+      "args": [],
       "env": {
         "AIRBRAKE_USER_KEY": "your_user_key",
         "AIRBRAKE_PROJECT_ID": "123456"

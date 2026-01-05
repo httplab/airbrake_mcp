@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2] - 2025-01-06
+
+### Added
+- Documentation for rbenv/asdf/chruby users (non-interactive shell shim paths)
+- Improved `claude mcp add` examples with `$(which airbrake_mcp)`
+
 ## [1.0.1] - 2025-01-06
 
 ### Changed
