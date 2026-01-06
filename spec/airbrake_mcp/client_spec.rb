@@ -5,7 +5,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#projects' do
     it 'fetches all projects' do
-      stub_request(:get, 'https://api.airbrake.io/projects')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects')
         .with(query: hash_including(key: 'test_key'))
         .to_return(status: 200, body: fixture('projects').to_json)
 
@@ -19,7 +19,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#groups' do
     it 'fetches error groups for a project' do
-      stub_request(:get, 'https://api.airbrake.io/projects/123/groups')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects/123/groups')
         .with(query: hash_including(key: 'test_key', page: '1', limit: '20'))
         .to_return(status: 200, body: fixture('groups').to_json)
 
@@ -30,7 +30,7 @@ RSpec.describe AirbrakeMcp::Client do
     end
 
     it 'supports pagination parameters' do
-      stub_request(:get, 'https://api.airbrake.io/projects/123/groups')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects/123/groups')
         .with(query: hash_including(page: '2', limit: '50'))
         .to_return(status: 200, body: { groups: [], count: 0 }.to_json)
 
@@ -42,7 +42,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#group' do
     it 'fetches a single error group' do
-      stub_request(:get, 'https://api.airbrake.io/projects/123/groups/1001')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects/123/groups/1001')
         .with(query: hash_including(key: 'test_key'))
         .to_return(status: 200, body: fixture('group').to_json)
 
@@ -54,7 +54,7 @@ RSpec.describe AirbrakeMcp::Client do
 
     context 'when group is not found' do
       it 'raises NotFoundError' do
-        stub_request(:get, 'https://api.airbrake.io/projects/123/groups/9999')
+        stub_request(:get, 'https://api.airbrake.io/api/v4/projects/123/groups/9999')
           .with(query: hash_including(key: 'test_key'))
           .to_return(status: 404, body: { error: 'Not found' }.to_json)
 
@@ -65,7 +65,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#notices' do
     it 'fetches notices for an error group' do
-      stub_request(:get, 'https://api.airbrake.io/projects/123/groups/1001/notices')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects/123/groups/1001/notices')
         .with(query: hash_including(key: 'test_key'))
         .to_return(status: 200, body: fixture('notices').to_json)
 
@@ -77,7 +77,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#resolve_group' do
     it 'marks a group as resolved' do
-      stub_request(:put, 'https://api.airbrake.io/projects/123/groups/1001/resolved?key=test_key')
+      stub_request(:put, 'https://api.airbrake.io/api/v4/projects/123/groups/1001/resolved?key=test_key')
         .to_return(status: 200, body: '')
 
       result = client.resolve_group(1001)
@@ -88,7 +88,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#unresolve_group' do
     it 'marks a group as unresolved' do
-      stub_request(:put, 'https://api.airbrake.io/projects/123/groups/1001/unresolved?key=test_key')
+      stub_request(:put, 'https://api.airbrake.io/api/v4/projects/123/groups/1001/unresolved?key=test_key')
         .to_return(status: 200, body: '')
 
       result = client.unresolve_group(1001)
@@ -99,7 +99,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#mute_group' do
     it 'mutes a group' do
-      stub_request(:put, 'https://api.airbrake.io/projects/123/groups/1001/muted?key=test_key')
+      stub_request(:put, 'https://api.airbrake.io/api/v4/projects/123/groups/1001/muted?key=test_key')
         .to_return(status: 200, body: '')
 
       result = client.mute_group(1001)
@@ -110,7 +110,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe '#unmute_group' do
     it 'unmutes a group' do
-      stub_request(:put, 'https://api.airbrake.io/projects/123/groups/1001/unmuted?key=test_key')
+      stub_request(:put, 'https://api.airbrake.io/api/v4/projects/123/groups/1001/unmuted?key=test_key')
         .to_return(status: 200, body: '')
 
       result = client.unmute_group(1001)
@@ -121,7 +121,7 @@ RSpec.describe AirbrakeMcp::Client do
 
   describe 'error handling' do
     it 'raises AuthenticationError on 401' do
-      stub_request(:get, 'https://api.airbrake.io/projects')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects')
         .with(query: hash_including(key: 'test_key'))
         .to_return(status: 401, body: '')
 
@@ -129,7 +129,7 @@ RSpec.describe AirbrakeMcp::Client do
     end
 
     it 'raises RateLimitError on 429' do
-      stub_request(:get, 'https://api.airbrake.io/projects')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects')
         .with(query: hash_including(key: 'test_key'))
         .to_return(status: 429, body: '')
 
@@ -137,7 +137,7 @@ RSpec.describe AirbrakeMcp::Client do
     end
 
     it 'raises ApiError on other errors' do
-      stub_request(:get, 'https://api.airbrake.io/projects')
+      stub_request(:get, 'https://api.airbrake.io/api/v4/projects')
         .with(query: hash_including(key: 'test_key'))
         .to_return(status: 500, body: '')
 

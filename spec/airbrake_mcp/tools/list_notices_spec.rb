@@ -12,7 +12,7 @@ RSpec.describe AirbrakeMcp::Tools::ListNotices do
       response = described_class.call(group_id: 1001, server_context: server_context)
 
       expect(response.error?).to be false
-      expect(response.content.first.text).to include('Error occurrences')
+      expect(response.content.first[:text]).to include('Error occurrences')
     end
 
     it 'passes pagination parameters' do
@@ -32,7 +32,7 @@ RSpec.describe AirbrakeMcp::Tools::ListNotices do
         response = described_class.call(group_id: 9999, server_context: server_context)
 
         expect(response.error?).to be true
-        expect(response.content.first.text).to include('not found')
+        expect(response.content.first[:text]).to include('not found')
       end
     end
   end

@@ -16,7 +16,7 @@ RSpec.describe AirbrakeMcp::Tools::ListProjects do
 
       expect(response).to be_a(MCP::Tool::Response)
       expect(response.error?).to be false
-      expect(response.content.first.text).to include('Found 2 projects')
+      expect(response.content.first[:text]).to include('Found 2 projects')
     end
 
     context 'when API error occurs' do
@@ -26,7 +26,7 @@ RSpec.describe AirbrakeMcp::Tools::ListProjects do
         response = described_class.call(server_context: server_context)
 
         expect(response.error?).to be true
-        expect(response.content.first.text).to include('Error: Connection failed')
+        expect(response.content.first[:text]).to include('Error: Connection failed')
       end
     end
   end

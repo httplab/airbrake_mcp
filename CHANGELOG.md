@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.4] - 2026-01-06
+
+### Fixed
+- Fixed API URL path construction (removed leading slashes causing requests to bypass /api/v4 path)
+- Fixed MCP response serialization (workaround for MCP gem bug where Content objects aren't converted to hashes)
+
 ## [1.0.3] - 2026-01-06
 
 ### Fixed

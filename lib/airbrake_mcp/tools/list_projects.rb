@@ -10,13 +10,9 @@ module AirbrakeMcp
         client = server_context[:client]
         projects = client.projects
 
-        MCP::Tool::Response.new([
-          MCP::Content::Text.new(Formatters.format_projects(projects))
-        ])
+        ResponseHelper.text_response(Formatters.format_projects(projects))
       rescue Client::ApiError => e
-        MCP::Tool::Response.new([
-          MCP::Content::Text.new("Error: #{e.message}")
-        ], error: true)
+        ResponseHelper.text_response("Error: #{e.message}", error: true)
       end
     end
   end

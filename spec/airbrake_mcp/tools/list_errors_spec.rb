@@ -12,7 +12,7 @@ RSpec.describe AirbrakeMcp::Tools::ListErrors do
       response = described_class.call(server_context: server_context)
 
       expect(response.error?).to be false
-      expect(response.content.first.text).to include('Found 2 error groups')
+      expect(response.content.first[:text]).to include('Found 2 error groups')
     end
 
     it 'passes pagination parameters' do
@@ -42,7 +42,7 @@ RSpec.describe AirbrakeMcp::Tools::ListErrors do
         response = described_class.call(server_context: server_context)
 
         expect(response.error?).to be true
-        expect(response.content.first.text).to include('No project_id specified')
+        expect(response.content.first[:text]).to include('No project_id specified')
       end
     end
   end

@@ -21,24 +21,16 @@ module AirbrakeMcp
         pid = project_id || client.project_id
 
         unless pid
-          return MCP::Tool::Response.new([
-            MCP::Content::Text.new("Error: No project_id specified and no default configured")
-          ], error: true)
+          return ResponseHelper.text_response("Error: No project_id specified and no default configured", error: true)
         end
 
         result = client.notices(group_id, project_id: pid, page: page, limit: limit)
 
-        MCP::Tool::Response.new([
-          MCP::Content::Text.new(Formatters.format_notices(result))
-        ])
+        ResponseHelper.text_response(Formatters.format_notices(result))
       rescue Client::NotFoundError
-        MCP::Tool::Response.new([
-          MCP::Content::Text.new("Error: Error group #{group_id} not found")
-        ], error: true)
+        ResponseHelper.text_response("Error: Error group #{group_id} not found", error: true)
       rescue Client::ApiError => e
-        MCP::Tool::Response.new([
-          MCP::Content::Text.new("Error: #{e.message}")
-        ], error: true)
+        ResponseHelper.text_response("Error: #{e.message}", error: true)
       end
     end
   end

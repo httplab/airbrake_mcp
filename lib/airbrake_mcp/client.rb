@@ -15,36 +15,36 @@ module AirbrakeMcp
     attr_reader :project_id
 
     def projects
-      get('/projects')['projects']
+      get('projects')['projects']
     end
 
     def groups(project_id: @project_id, page: 1, limit: 20)
-      get("/projects/#{project_id}/groups", { page: page, limit: limit })
+      get("projects/#{project_id}/groups", { page: page, limit: limit })
     end
 
     def group(group_id, project_id: @project_id)
-      get("/projects/#{project_id}/groups/#{group_id}")
+      get("projects/#{project_id}/groups/#{group_id}")
     end
 
     def notices(group_id, project_id: @project_id, page: 1, limit: 10)
-      get("/projects/#{project_id}/groups/#{group_id}/notices", { page: page, limit: limit })
+      get("projects/#{project_id}/groups/#{group_id}/notices", { page: page, limit: limit })
     end
 
     # Write operations
     def resolve_group(group_id, project_id: @project_id)
-      put("/projects/#{project_id}/groups/#{group_id}/resolved")
+      put("projects/#{project_id}/groups/#{group_id}/resolved")
     end
 
     def unresolve_group(group_id, project_id: @project_id)
-      put("/projects/#{project_id}/groups/#{group_id}/unresolved")
+      put("projects/#{project_id}/groups/#{group_id}/unresolved")
     end
 
     def mute_group(group_id, project_id: @project_id)
-      put("/projects/#{project_id}/groups/#{group_id}/muted")
+      put("projects/#{project_id}/groups/#{group_id}/muted")
     end
 
     def unmute_group(group_id, project_id: @project_id)
-      put("/projects/#{project_id}/groups/#{group_id}/unmuted")
+      put("projects/#{project_id}/groups/#{group_id}/unmuted")
     end
 
     private

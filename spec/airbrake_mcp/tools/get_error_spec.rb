@@ -12,8 +12,8 @@ RSpec.describe AirbrakeMcp::Tools::GetError do
       response = described_class.call(group_id: 1001, server_context: server_context)
 
       expect(response.error?).to be false
-      expect(response.content.first.text).to include('Error Group #1001')
-      expect(response.content.first.text).to include('RuntimeError')
+      expect(response.content.first[:text]).to include('Error Group #1001')
+      expect(response.content.first[:text]).to include('RuntimeError')
     end
 
     context 'when group is not found' do
@@ -23,7 +23,7 @@ RSpec.describe AirbrakeMcp::Tools::GetError do
         response = described_class.call(group_id: 9999, server_context: server_context)
 
         expect(response.error?).to be true
-        expect(response.content.first.text).to include('not found')
+        expect(response.content.first[:text]).to include('not found')
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe AirbrakeMcp::Tools::GetError do
         response = described_class.call(group_id: 1001, server_context: server_context)
 
         expect(response.error?).to be true
-        expect(response.content.first.text).to include('No project_id specified')
+        expect(response.content.first[:text]).to include('No project_id specified')
       end
     end
   end
