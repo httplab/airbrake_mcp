@@ -142,11 +142,81 @@ Parameters:
 bundle exec rspec
 ```
 
-### Building the Gem
+### Building and Installing from Source
 
 ```bash
+# Build the gem
 gem build airbrake_mcp.gemspec
+
+# Install locally
+gem install ./airbrake_mcp-*.gem --no-document
+
+# If using rbenv, rehash to update shims
+rbenv rehash
 ```
+
+### Updating an Installed Gem
+
+When updating the gem after code changes:
+
+```bash
+# 1. Remove ALL old versions
+gem uninstall airbrake_mcp --all --executables --ignore-dependencies
+
+# 2. Remove old gem files
+rm -f *.gem
+
+# 3. Build fresh gem
+gem build airbrake_mcp.gemspec
+
+# 4. Install with force flag
+gem install ./airbrake_mcp-*.gem --no-document --force
+
+# 5. Rehash rbenv shims
+rbenv rehash
+
+# 6. Verify installation
+gem which airbrake_mcp
+```
+
+## Troubleshooting
+
+### "command not found" after installation
+
+If you see `rbenv: airbrake_mcp: command not found`, the gem was installed for a different Ruby version.
+
+```bash
+# Check which Ruby versions have the gem
+rbenv versions  # shows available versions
+gem list airbrake_mcp  # shows if installed for current Ruby
+
+# Install for the correct Ruby version
+RBENV_VERSION=3.4.4 gem install ./airbrake_mcp-*.gem --no-document
+rbenv rehash
+```
+
+### MCP fails to connect after gem update
+
+1. Ensure the gem is completely uninstalled before reinstalling:
+   ```bash
+   gem uninstall airbrake_mcp --all --executables --ignore-dependencies
+   ```
+
+2. Verify the new code is in the built gem:
+   ```bash
+   gem unpack airbrake_mcp-*.gem --target=/tmp/check
+   cat /tmp/check/airbrake_mcp-*/lib/airbrake_mcp/client.rb
+   rm -rf /tmp/check
+   ```
+
+3. After installation, verify the installed code:
+   ```bash
+   cat $(dirname $(gem which airbrake_mcp))/airbrake_mcp/client.rb
+   ```
+
+### Large Error Group IDs
+
+Airbrake uses very large integers for error group IDs (e.g., `4235892606830408977`). These IDs are passed as strings to avoid JavaScript precision loss issues. When using tools like `get_error` or `list_notices`, provide the `group_id` exactly as shown in `list_errors` output.
 
 ## License
 

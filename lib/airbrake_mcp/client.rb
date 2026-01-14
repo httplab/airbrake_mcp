@@ -23,7 +23,7 @@ module AirbrakeMcp
     end
 
     def group(group_id, project_id: @project_id)
-      get("projects/#{project_id}/groups/#{group_id}")
+      get("projects/#{project_id}/groups/#{group_id}")['group']
     end
 
     def notices(group_id, project_id: @project_id, page: 1, limit: 10)

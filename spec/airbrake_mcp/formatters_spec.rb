@@ -29,7 +29,7 @@ RSpec.describe AirbrakeMcp::Formatters do
       result = described_class.format_groups(groups_data)
 
       expect(result).to include('Found 2 error groups')
-      expect(result).to include('[OPEN] #1001')
+      expect(result).to include('[OPEN] id:1001')
       expect(result).to include('[RESOLVED]')
       expect(result).to include('(muted)')
       expect(result).to include('RuntimeError')
@@ -45,7 +45,7 @@ RSpec.describe AirbrakeMcp::Formatters do
 
   describe '.format_group_detail' do
     it 'formats detailed error information' do
-      group = fixture('group')
+      group = fixture('group')['group']
 
       result = described_class.format_group_detail(group)
 

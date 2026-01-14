@@ -1,21 +1,23 @@
 {
-  "id": 1001,
-  "resolved": false,
-  "muted": false,
-  "noticeCount": 42,
-  "lastNoticeAt": "2025-01-05T10:00:00Z",
-  "createdAt": "2025-01-01T00:00:00Z",
-  "lastDeployAt": "2025-01-03T12:00:00Z",
-  "context": { "environment": "production" },
-  "errors": [
-    {
-      "type": "RuntimeError",
-      "message": "Something went wrong in the application",
-      "backtrace": [
-        { "file": "app/models/user.rb", "line": 42, "function": "save!" },
-        { "file": "app/controllers/users_controller.rb", "line": 15, "function": "create" },
-        { "file": "lib/middleware/auth.rb", "line": 8, "function": "call" }
-      ]
-    }
-  ]
+  "group": {
+    "id": 1001,
+    "resolved": false,
+    "muted": false,
+    "noticeCount": 42,
+    "lastNoticeAt": "2025-01-05T10:00:00Z",
+    "createdAt": "2025-01-01T00:00:00Z",
+    "lastDeployAt": "2025-01-03T12:00:00Z",
+    "context": { "environment": "production" },
+    "errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Something went wrong in the application",
+        "backtrace": [
+          { "file": "app/models/user.rb", "line": 42, "function": "save!" },
+          { "file": "app/controllers/users_controller.rb", "line": 15, "function": "create" },
+          { "file": "lib/middleware/auth.rb", "line": 8, "function": "call" }
+        ]
+      }
+    ]
+  }
 }

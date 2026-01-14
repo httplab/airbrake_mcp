@@ -7,9 +7,9 @@ RSpec.describe AirbrakeMcp::Tools::ResolveError do
   describe '.call' do
     context 'when resolving' do
       it 'marks error as resolved' do
-        allow(client).to receive(:resolve_group).with(1001, project_id: 123).and_return(true)
+        allow(client).to receive(:resolve_group).with('1001', project_id: 123).and_return(true)
 
-        response = described_class.call(group_id: 1001, server_context: server_context)
+        response = described_class.call(group_id: '1001', server_context: server_context)
 
         expect(response.error?).to be false
         expect(response.content.first[:text]).to include('resolved')
@@ -18,9 +18,9 @@ RSpec.describe AirbrakeMcp::Tools::ResolveError do
 
     context 'when unresolving' do
       it 'marks error as unresolved' do
-        allow(client).to receive(:unresolve_group).with(1001, project_id: 123).and_return(true)
+        allow(client).to receive(:unresolve_group).with('1001', project_id: 123).and_return(true)
 
-        response = described_class.call(group_id: 1001, resolved: false, server_context: server_context)
+        response = described_class.call(group_id: '1001', resolved: false, server_context: server_context)
 
         expect(response.error?).to be false
         expect(response.content.first[:text]).to include('unresolved')
@@ -31,7 +31,7 @@ RSpec.describe AirbrakeMcp::Tools::ResolveError do
       it 'returns error response' do
         allow(client).to receive(:resolve_group).and_raise(AirbrakeMcp::Client::NotFoundError)
 
-        response = described_class.call(group_id: 9999, server_context: server_context)
+        response = described_class.call(group_id: '9999', server_context: server_context)
 
         expect(response.error?).to be true
         expect(response.content.first[:text]).to include('not found')
@@ -42,7 +42,7 @@ RSpec.describe AirbrakeMcp::Tools::ResolveError do
       let(:client) { instance_double(AirbrakeMcp::Client, project_id: nil) }
 
       it 'returns error' do
-        response = described_class.call(group_id: 1001, server_context: server_context)
+        response = described_class.call(group_id: '1001', server_context: server_context)
 
         expect(response.error?).to be true
         expect(response.content.first[:text]).to include('No project_id specified')

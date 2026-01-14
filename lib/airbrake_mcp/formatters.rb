@@ -29,7 +29,7 @@ module AirbrakeMcp
         muted = group['muted'] ? ' (muted)' : ''
         error = group['errors']&.first || {}
 
-        output += "#{status}#{muted} ##{group['id']}\n"
+        output += "#{status}#{muted} id:#{group['id']}\n"
         output += "  Type: #{error['type']}\n"
         output += "  Message: #{truncate(error['message'], 100)}\n"
         output += "  Count: #{group['noticeCount']} occurrences\n"

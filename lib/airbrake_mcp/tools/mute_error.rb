@@ -8,7 +8,7 @@ module AirbrakeMcp
 
       input_schema(
         properties: {
-          group_id: { type: "integer", description: "Error group ID" },
+          group_id: { type: "string", description: "Error group ID" },
           project_id: { type: "integer", description: "Project ID (uses default if not specified)" },
           mute: { type: "boolean", description: "true to mute, false to unmute (default: true)" }
         },
