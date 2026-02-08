@@ -99,8 +99,9 @@ List error groups with filtering options.
 Parameters:
 - `project_id` (optional) - Project ID, uses default if not specified
 - `page` (optional) - Page number, default: 1
-- `limit` (optional) - Results per page, default: 20
+- `limit` (optional) - Results per page, default: 20, max: 100
 - `resolved` (optional) - Filter by resolved status (true/false)
+- `order` (optional) - Sort order: `last_notice`, `notice_count`, `weight`, `created`
 
 ### get_error
 Get detailed information about a specific error group including backtrace.
@@ -117,6 +118,13 @@ Parameters:
 - `project_id` (optional) - Project ID
 - `page` (optional) - Page number, default: 1
 - `limit` (optional) - Results per page, default: 10
+
+### resolve_all
+Resolve all open error groups in a project. Iterates through all pages.
+
+Parameters:
+- `project_id` (optional) - Project ID, uses default if not specified
+- `dry_run` (optional) - If true, only count groups without resolving (default: false)
 
 ### resolve_error
 Mark an error group as resolved or unresolve it.

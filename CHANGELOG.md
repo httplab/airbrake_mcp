@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0] - 2026-02-08
+
+### Fixed
+- Fixed `put` method silently swallowing HTTP errors (now raises exceptions like `get`)
+- Fixed `handle_response` to handle 204 No Content responses from resolve/mute endpoints
+- Fixed `list_errors` client-side filtering — now passes `resolved` filter to API server-side
+
+### Added
+- New `resolve_all` tool for bulk-resolving all open error groups in a project (with `dry_run` option)
+- `order` parameter for `list_errors` (supports: `last_notice`, `notice_count`, `weight`, `created`)
+- Server-side filter passthrough for `groups` client method
+
 ## [1.0.4] - 2026-01-06
 
 ### Fixed

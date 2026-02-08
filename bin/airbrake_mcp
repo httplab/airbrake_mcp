@@ -26,6 +26,7 @@ server = MCP::Server.new(
     AirbrakeMcp::Tools::GetError,
     AirbrakeMcp::Tools::ListNotices,
     AirbrakeMcp::Tools::ResolveError,
+    AirbrakeMcp::Tools::ResolveAll,
     AirbrakeMcp::Tools::MuteError
   ],
   server_context: { client: client }

@@ -18,8 +18,9 @@ module AirbrakeMcp
       get('projects')['projects']
     end
 
-    def groups(project_id: @project_id, page: 1, limit: 20)
-      get("projects/#{project_id}/groups", { page: page, limit: limit })
+    def groups(project_id: @project_id, page: 1, limit: 20, **filters)
+      params = { page: page, limit: limit }.merge(filters.compact)
+      get("projects/#{project_id}/groups", params)
     end
 
     def group(group_id, project_id: @project_id)
@@ -56,12 +57,13 @@ module AirbrakeMcp
 
     def put(path)
       response = connection.put("#{path}?key=#{@user_key}")
-      response.success?
+      handle_response(response)
     end
 
     def handle_response(response)
       case response.status
       when 200..299
+        return true if response.body.nil? || response.body.empty?
         JSON.parse(response.body)
       when 401
         raise AuthenticationError, 'Invalid API key'
