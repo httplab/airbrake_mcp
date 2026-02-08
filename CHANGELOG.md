@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2026-02-08
+
+### Fixed
+- Clear Bundler environment variables on startup to avoid conflicts when launched from project directories — eliminates the need for a wrapper script
+
 ## [1.1.0] - 2026-02-08
 
 ### Fixed

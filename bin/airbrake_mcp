@@ -1,6 +1,13 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# Clear Bundler environment to avoid conflicts when launched from
+# project directories that have their own Gemfile (e.g., Claude Code MCP)
+ENV.delete('BUNDLE_GEMFILE')
+ENV.delete('BUNDLE_PATH')
+ENV.delete('BUNDLE_BIN')
+ENV.delete('BUNDLE_APP_CONFIG')
+
 # Load dotenv for development (optional)
 begin
   require 'dotenv/load'

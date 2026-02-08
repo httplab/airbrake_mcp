@@ -69,6 +69,8 @@ claude mcp add airbrake ~/.asdf/shims/airbrake_mcp \
   -e AIRBRAKE_PROJECT_ID=123456
 ```
 
+> **Note:** Since v1.1.1, the gem automatically clears Bundler environment variables on startup. No wrapper script is needed — point directly to the shim.
+
 ### Manual Configuration
 
 Add to `~/.claude/settings.json`:
