@@ -13,8 +13,7 @@ module AirbrakeMcp
           limit: { type: "integer", description: "Results per page (default: 20, max: 100)" },
           resolved: { type: "boolean", description: "Filter by resolved status (true/false)" },
           order: { type: "string", description: "Sort order: last_notice, notice_count, weight, created (default: last_notice)" }
-        },
-        required: []
+        }
       )
 
       def self.call(project_id: nil, page: 1, limit: 20, resolved: nil, order: nil, server_context:)

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.2] - 2026-03-25
+
+### Fixed
+- Removed empty `required: []` from `list_errors` and `resolve_all` input schemas — fixes crash with `mcp` gem >= 0.9 which validates JSON Schema draft-04 minimum items constraint
+
 ## [1.1.1] - 2026-02-08
 
 ### Fixed

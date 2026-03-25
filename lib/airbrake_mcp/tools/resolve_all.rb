@@ -10,8 +10,7 @@ module AirbrakeMcp
         properties: {
           project_id: { type: "integer", description: "Project ID (uses default if not specified)" },
           dry_run: { type: "boolean", description: "If true, only count groups without resolving (default: false)" }
-        },
-        required: []
+        }
       )
 
       def self.call(project_id: nil, dry_run: false, server_context:)
