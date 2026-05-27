@@ -8,15 +8,16 @@ module AirbrakeMcp
 
       input_schema(
         properties: {
-          project_id: { type: "integer", description: "Project ID (uses default if not specified)" },
-          page: { type: "integer", description: "Page number (default: 1)" },
-          limit: { type: "integer", description: "Results per page (default: 20, max: 100)" },
-          resolved: { type: "boolean", description: "Filter by resolved status (true/false)" },
-          order: { type: "string", description: "Sort order: last_notice, notice_count, weight, created (default: last_notice)" }
+          project_id:  { type: "integer", description: "Project ID (uses default if not specified)" },
+          page:        { type: "integer", description: "Page number (default: 1)" },
+          limit:       { type: "integer", description: "Results per page (default: 20, max: 100)" },
+          resolved:    { type: "boolean", description: "Filter by resolved status (true/false)" },
+          order:       { type: "string",  description: "Sort order: last_notice, notice_count, weight, created (default: last_notice)" },
+          environment: { type: "string",  description: "Filter by environment name (e.g. production, staging)" }
         }
       )
 
-      def self.call(project_id: nil, page: 1, limit: 20, resolved: nil, order: nil, server_context:)
+      def self.call(project_id: nil, page: 1, limit: 20, resolved: nil, order: nil, environment: nil, server_context:)
         client = server_context[:client]
         pid = project_id || client.project_id
 
@@ -27,6 +28,7 @@ module AirbrakeMcp
         filters = {}
         filters[:resolved] = resolved unless resolved.nil?
         filters[:order] = order if order
+        filters[:"context.environment"] = environment if environment
 
         result = client.groups(project_id: pid, page: page, limit: limit, **filters)
 
