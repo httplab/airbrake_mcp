@@ -104,6 +104,7 @@ Parameters:
 - `limit` (optional) - Results per page, default: 20, max: 100
 - `resolved` (optional) - Filter by resolved status (true/false)
 - `order` (optional) - Sort order: `last_notice`, `notice_count`, `weight`, `created`
+- `environment` (optional) - Filter by environment name (e.g. `production`, `staging`). Maps to the `context.environment` query parameter in the Airbrake API.
 
 ### get_error
 Get detailed information about a specific error group including backtrace.
